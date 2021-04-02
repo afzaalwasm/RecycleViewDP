@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
 import java.util.ArrayList
 import kotlin.math.log
@@ -35,9 +36,10 @@ class TodoAdapter(
 
     override fun onBindViewHolder(holder: TodoviewHolder, position: Int) {
         holder.itemView.apply {
-            tvTitle.text = todos[position].title
-            cbDone.isChecked = todos[position].isChecked
-            imageView.setImageResource(R.drawable.ic_launcher_background)
+            tvTitle.text = todos[position].name
+            tv_amount.text = todos[position].amount.toString()
+
+//            imageView.setImageResource(R.drawable.ic_launcher_background)
             tvTitle.setOnClickListener {
                 Log.d("tvTitle", "onBindViewHolder: ${tvTitle.text}")
                 Toast.makeText(ctx, "${tvTitle.text}", Toast.LENGTH_SHORT).show()

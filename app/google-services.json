@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "13237248179",
+    "firebase_url": "https://fir-app-ed6a0-default-rtdb.firebaseio.com",
+    "project_id": "fir-app-ed6a0",
+    "storage_bucket": "fir-app-ed6a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13237248179:android:4644dec00bfc86501650c6",
+        "android_client_info": {
+          "package_name": "com.wasim.firebaseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13237248179-vgqvu10os21d8qu5tgro3vqpqstgk9jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD72w7IDyZnHDu-QONWFb0botIGR1Gh-68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13237248179-vgqvu10os21d8qu5tgro3vqpqstgk9jm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13237248179:android:bdc4e92f49e684261650c6",
+        "android_client_info": {
+          "package_name": "com.wasim.recycleviewdp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13237248179-vgqvu10os21d8qu5tgro3vqpqstgk9jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD72w7IDyZnHDu-QONWFb0botIGR1Gh-68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13237248179-vgqvu10os21d8qu5tgro3vqpqstgk9jm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
