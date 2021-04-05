@@ -3,7 +3,9 @@ package com.wasim.demobottomnavigation.fragments
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.os.Build.ID
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,18 +15,20 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 import com.wasim.recycleviewdp.R
 import com.wasim.recycleviewdp.Todo
 import com.wasim.recycleviewdp.TodoAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_fetch_data.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.userinfo_popup.view.*
 
 class HomeFragment : Fragment() {
-
-    lateinit var adapter: TodoAdapter
+    //    this is database referance
+    var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    lateinit var todoAdapter: TodoAdapter
     val todoList = arrayListOf<Todo>()
     private val itemTouchClick = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         override fun onMove(
@@ -34,15 +38,18 @@ class HomeFragment : Fragment() {
         ): Boolean = false
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            (todoList as ArrayList<Todo>).removeAt(viewHolder.adapterPosition)
-            adapter.notifyDataSetChanged()
+            val referece = database!!.getReference("Data")
+            val curentdate = referece.child("03-04-2021")
+            curentdate.child(viewHolder.adapterPosition.toString()).removeValue()
+            todoList.removeAt(viewHolder.adapterPosition)
+            todoAdapter.notifyDataSetChanged()
+            curentdate.setValue(todoList)
 
             //adapter.notifyItemChanged(viewHolder.adapterPosition)
         }
     }
 
-    //    this is database referance
-    var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+
 
     private var userId: String = ""
     override fun onCreateView(
@@ -60,9 +67,25 @@ class HomeFragment : Fragment() {
         val referece = database!!.getReference("Data")
         val curentdate = referece.child("03-04-2021")
 
-        adapter = TodoAdapter(ctx!!, todoList as ArrayList<Todo>)
-        rvTodos.adapter = adapter
-        rvTodos.layoutManager = LinearLayoutManager(ctx!!)
+        curentdate.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                todoList.clear()
+                snapshot.children.forEach {
+                    val todo = it.getValue(Todo::class.java)
+                    todoList.add(todo!!)
+                }
+                todoAdapter = TodoAdapter(HomeFragment.ctx!!, todoList as ArrayList<Todo>)
+                if (isAdded) {
+                    rvTodos.adapter = todoAdapter
+                    rvTodos.layoutManager = LinearLayoutManager(HomeFragment.ctx!!)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("error", error.toString())
+            }
+
+        })
         val callback = ItemTouchHelper(itemTouchClick)
         callback.attachToRecyclerView(rvTodos)
         btnAddtodo.setOnClickListener {
@@ -70,14 +93,10 @@ class HomeFragment : Fragment() {
         }
         btn_clear.setOnClickListener {
             todoList.clear()
-            adapter.notifyDataSetChanged()
+            todoAdapter.notifyDataSetChanged()
         }
         btn_send.setOnClickListener {
             curentdate.setValue(todoList )
-//            for (todo in todoList) {
-//                    curentdate.child(todo)
-////                curentdate.child(todo.name.toString()).setValue(todo.amount)
-//            }
         }
     }
 
@@ -102,8 +121,8 @@ class HomeFragment : Fragment() {
             val amount = view.et_amount.text.toString().toInt()
             val todo = Todo(name, amount)
             todoList.add(todo)
-            adapter.notifyDataSetChanged()
-            adapter.notifyItemInserted(todoList.size - 1)
+            todoAdapter.notifyDataSetChanged()
+            todoAdapter.notifyItemInserted(todoList.size - 1)
             rvTodos.scrollToPosition(todoList.size - 1)
             dialog.dismiss()
         }

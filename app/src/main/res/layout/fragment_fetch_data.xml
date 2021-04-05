@@ -3,35 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/tv_fetchdata_fragment_output"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fetch_fragment"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_h_1"
+        app:layout_constraintBottom_toTopOf="@+id/btn_fetch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_fetchdata_fragment_output"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/guideline3"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_fetchdata_fragment_output2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintVertical_bias="0.2"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/guideline3" />-->
 
     <Button
         android:id="@+id/btn_fetch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Fetch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_h_1"
         app:layout_constraintBottom_toBottomOf="parent"
-         />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_h_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90009576" />
+    <!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_percent="0.50" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
