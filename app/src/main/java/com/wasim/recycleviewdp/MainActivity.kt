@@ -2,12 +2,11 @@ package com.wasim.recycleviewdp
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.wasim.demobottomnavigation.fragments.AddLocationFragment
+import com.wasim.demobottomnavigation.fragments.FetchDataFragment
 import com.wasim.demobottomnavigation.fragments.FavoriteFragment
 import com.wasim.demobottomnavigation.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val homeFragment = HomeFragment()
         val favoriteFragment = FavoriteFragment()
-        val addLocationFragment = AddLocationFragment()
+        val addLocationFragment = FetchDataFragment()
 
         makeCurrentFragment(homeFragment)
         bottom_navigation.setOnNavigationItemSelectedListener {
